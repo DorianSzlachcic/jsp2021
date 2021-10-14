@@ -1,11 +1,11 @@
-import math
+import cmath
 
 a = int(input("Podaj czesc rzeczywista liczby: "))
 b = int(input("Podaj czesc urojona liczby: "))
 z = complex(a ,b)
 
-modZ = math.sqrt(z.real**2 + z.imag**2)
+modZ = abs(z)
 print(modZ)
-argZ = math.atan(z.imag/z.real)
+argZ = cmath.phase(z)
 print(argZ)
 print(z.conjugate())
