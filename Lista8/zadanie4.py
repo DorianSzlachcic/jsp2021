@@ -1,4 +1,5 @@
 from os import execle
+from typing import final
 
 
 def walidacjaPESEL(pesel: str) -> bool:
@@ -44,24 +45,26 @@ def plec(pesel: str) -> str:
     return p[int(pesel[9])%2]
 
 try:
-    readFile = open("PESEL.txt","r")
-    pesele = readFile.read().split("\n")
-    readFile.close()
-
-    toSave = ""
-    for pesel in pesele:
-        if walidacjaPESEL(pesel):
-            toSave += "nr "+pesel+":\n data urodzenia "+ dataUrodzenia(pesel) + "\t plec: " + plec(pesel) + "\n"
-        else:
-            toSave += "nr "+pesel+":\n Nieprawidlowy PESEL\n"
-    
-    try:
-        saveFile = open("PESEL.txt","w")
-        saveFile.write(toSave)
-        saveFile.close()
-    except:
-        print("Blad zapisu do pliku")
+    with open("PESEL.txt","r") as readFile:
+        pesele = readFile.read().split("\n")
 except FileNotFoundError:
     print("Plik nie istanieje")
+    exit()
 except:
     print("Nie można otworzyc pliku")
+    exit()
+
+toSave = ""
+for pesel in pesele:
+    if walidacjaPESEL(pesel):
+        toSave += "nr "+pesel+":\n data urodzenia "+ dataUrodzenia(pesel) + "\t plec: " + plec(pesel) + "\n"
+    else:
+        toSave += "nr "+pesel+":\n Nieprawidlowy PESEL\n"
+
+try:
+    saveFile = open("PESEL.txt","w")
+    saveFile.write(toSave)
+    saveFile.close()
+except:
+    print("Blad zapisu do pliku")
+    exit()
