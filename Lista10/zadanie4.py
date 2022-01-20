@@ -10,7 +10,7 @@ class Kursy:
             exit()
         self.root = tree.getroot()
 
-    def lista(self) -> list:
+    def lista(self) -> list[dict]:
         lista = []
         for x in self.root:
             d = {child.tag: child.text for child in x}
@@ -32,5 +32,6 @@ class Kursy:
 
 if __name__ == "__main__":
     k = Kursy("kursy.xml")
+    print(k.lista())
     print(k.konwertuj_z_PLN(k.konwertuj_na_PLN(100, "EUR"),"EUR"))
     print(k.konwertuj(100, "EUR", "CZK"))
