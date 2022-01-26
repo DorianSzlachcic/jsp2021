@@ -1,7 +1,13 @@
 import re
 
 def znajdzWyrazy(tekst: str, literaPoczatkowa: str) -> list:
-    pattern = "["+literaPoczatkowa.lower() + literaPoczatkowa.upper() +"][a-zA-Z0-9]+[ ,.]?"
+    pattern = r"\b["+literaPoczatkowa.lower() + literaPoczatkowa.upper() +r"][a-zA-Z0-9]+\b"
     return re.findall(pattern, tekst)
 
-print(znajdzWyrazy("Ala ma kota","a"))
+tekst = "Ala ma kota i elementarz"
+
+znalezione = []
+znalezione.extend(znajdzWyrazy(tekst,"a"))
+znalezione.extend(znajdzWyrazy(tekst,"e"))
+
+print(znalezione)
